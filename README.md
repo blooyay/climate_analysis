@@ -37,6 +37,10 @@ Install the `climate_analysis` package.
 
 `pip install -e .`
 
+Run the demo with
+
+`python demo.py`
+
 ## Reslults and Potential Solutions
 
 Below are plots generated with the code, their interpretation, and data-driven solutions for sustainability.
