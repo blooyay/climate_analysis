@@ -9,7 +9,10 @@ plot_vars = {'ocean_ph': 'Ocean ph',
              'd_total': 'Total Disasters'}
 
 def plot_normalized(df):
-    plt.figure(figsize=(10, 6))  # Optional: set the figure size
+    """
+    Plot the scaled variables to view relationships
+    """
+    plt.figure(figsize=(10, 6)) 
     plt.plot(df.index, df['pollution_scaled'], linestyle='-', color='blue', label='Pollution')
     plt.plot(df.index, df['d_total_scaled'], linestyle='-', color='red', label='Total Disasters')
     plt.plot(df.index, df['surface_temp_scaled'], linestyle='-', color='green', label='Surface Temp')
@@ -41,7 +44,9 @@ def plot_cross_corr(col1, col2):
     
     
 def plot_forecast(df, forecast_df, conf_df, var_name):
-
+    """
+    Plot the forecasting data with confidence bounds
+    """
     plt.figure(figsize=(12, 6))
     plt.plot(df.index, df[var_name], label='Historical')
     plt.fill_between(forecast_df.index, 
@@ -60,8 +65,7 @@ def correlation_matrix(df):
     """
     Plot the correlation matrix heat map
     """
-    # Create a heatmap
-    correlation_matrix = df.corr()
+    correlation_matrix = df[[c for c in df.columns if not c.endswith('_scaled')]].corr()
     plt.figure(figsize=(15, 15))
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
     plt.title('Correlation Matrix')

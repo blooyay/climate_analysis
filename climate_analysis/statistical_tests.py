@@ -4,13 +4,6 @@ from scipy.stats import pearsonr
 from statsmodels.tsa.stattools import ccf
 
 
-def granger_causality(df, col1, col2):
-    """
-    Compute the Granger causality value between two columns
-    """
-    granger = grangercausalitytests(df[[col1, col2]], maxlag=1, verbose=False)
-    return granger[1][0]['ssr_ftest'][1] 
-
 def corr(col1, col2):
     """
     Compute the correlation coefficient between two columns
