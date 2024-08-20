@@ -19,7 +19,7 @@ Install the `climate_analysis` package.
 
 ## How to run this code
 
-The data comes from the following sources:
+The data comes from the following sources, but is included in `data/`:
 
 #### Pollution data (CO2 ppm)
 https://climatedata.imf.org/pages/climatechange-data#cc3
@@ -35,9 +35,9 @@ https://climatedata.imf.org/pages/climatechange-data#cc3
 
 #### Ocean ph levels
 
-
+https://marine.copernicus.eu/access-data/ocean-monitoring-indicators/global-ocean-acidification-mean-sea-water-ph-time-series
 
 
 ## Reslults and Potential Solutions
 
-
+![Line Plot](relative/path/to/your/image.png)

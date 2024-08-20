@@ -7,7 +7,7 @@ setup(
     description='A package for data loading, plotting, statistical tests, and forecasting climate data.',
     author='Evan Bouillet',
     author_email='evanbouillet@gmail.com',
-    url='https://github.com/yourusername/climate_analysis',
+    url='https://github.com/blooyay/climate_analysis',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',

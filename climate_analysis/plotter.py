@@ -1,7 +1,12 @@
 import os
 import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import ccf
+import seaborn as sns
 
+plot_vars = {'ocean_ph': 'Ocean ph', 
+             'pollution': 'Pollution',
+             'surface_temp': 'Surface Temp',
+             'd_total': 'Total Disasters'}
 
 def plot_normalized(df):
     plt.figure(figsize=(10, 6))  # Optional: set the figure size
@@ -12,27 +17,27 @@ def plot_normalized(df):
 
     plt.xlabel('Date')
     plt.ylabel('Normalized Values')
-    plt.title('Pollution, Total Disasters, and Global Surface Temperature')
+    plt.title('Pollution, Total Disasters, Global Surface Temperature, and Ocean ph')
     plt.legend() 
     if not os.path.exists('output/'):
         os.makedirs('output/')
     plt.savefig('output/normalized_vars_over_time.png')
     
     
-def plot_cross_corr(df, col1, col2):
+def plot_cross_corr(col1, col2):
     """
     Plot the cross correlation between two columns of a pd.DataFrame
     """
-    cross_corr = ccf(df[col1], df[col2])[:20]
+    cross_corr = ccf(col1, col2)[:20]
 
     plt.figure(figsize=(10, 6))
     plt.stem(cross_corr)
-    plt.title('Cross-Correlation Function between Pollution and Surface Temperature')
+    plt.title(f'Cross-Correlation Function between {plot_vars[col1.name]} and {plot_vars[col2.name]}')
     plt.xlabel('Lag')
     plt.ylabel('Cross-Correlation')
     if not os.path.exists('output/'):
         os.makedirs('output/')
-    plt.savefig(f'output/cross_corr_{col2}_{col2}.png')
+    plt.savefig(f'output/cross_corr_{col1.name}_{col2.name}.png')
     
     
 def plot_forecast(df, forecast_df, conf_df, var_name):
@@ -44,9 +49,22 @@ def plot_forecast(df, forecast_df, conf_df, var_name):
                     conf_df['Upper Bound'], 
                     color='pink', alpha=0.3, label='Confidence Interval')
     plt.xlabel('Date')
-    plt.ylabel(var_name)
-    plt.title(f'{var_name} Forecast')
+    plt.ylabel(plot_vars[var_name])
+    plt.title(f'{plot_vars[var_name]} Forecast')
     plt.legend()
     if not os.path.exists('output/'):
         os.makedirs('output/')
-    plt.savefig('output/cross_corr_col2_col2.png')
+    plt.savefig(f'output/forecast_{var_name}.png')
+    
+def correlation_matrix(df):
+    """
+    Plot the correlation matrix heat map
+    """
+    # Create a heatmap
+    correlation_matrix = df.corr()
+    plt.figure(figsize=(15, 15))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
+    plt.title('Correlation Matrix')
+    if not os.path.exists('output/'):
+        os.makedirs('output/')
+    plt.savefig('output/correlation.png')

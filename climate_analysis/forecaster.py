@@ -5,10 +5,10 @@ def forecast(col, n_steps=100):
     """
     Forecast value into future years
     """
-    df = df.sort_index()
+    col = col.sort_index()
 
     # Fit the auto_arima model
-    model = auto_arima(df[col], 
+    model = auto_arima(col, 
                     start_p=1, start_q=1,
                     max_p=5, max_q=5, m=1,
                     start_P=0, seasonal=False,
@@ -21,7 +21,7 @@ def forecast(col, n_steps=100):
     forecast_periods = n_steps
     forecast, conf_int = model.predict(n_periods=forecast_periods, return_conf_int=True)
 
-    future_dates = pd.date_range(start=df.index[-1] + pd.DateOffset(years=1), periods=forecast_periods, freq='Y')
+    future_dates = pd.date_range(start=col.index[-1] + pd.DateOffset(years=1), periods=forecast_periods, freq='Y')
 
     forecast_df = pd.DataFrame(forecast, index=future_dates, columns=['Forecast'])
     conf_df = pd.DataFrame(conf_int, index=future_dates, columns=['Lower Bound', 'Upper Bound'])
