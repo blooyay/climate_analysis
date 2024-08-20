@@ -56,7 +56,7 @@ Cross correlation shows us the different correlation factors over different lag 
 
 According to the ARIMA forecasting model, the ocean ph confidence interval in 2050 will be between 7.99 and 8.01. 
 
-![Forecast pollution](assets/pollution.png)
+![Forecast pollution](assets/forecast_pollution.png)
 
 According to the ARIMA forecasting model, the pollution interval in 2050 will be between 461 and 509 co2 ppm. 
 
